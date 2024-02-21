@@ -89,7 +89,7 @@ with DAG(
         task_id="finalization",
         python_callable=finalize,
     )
-    # I had to change the oder of tasks, The orginal was preparation >> startup_task >> waiting_task >> finalization
+    # I had to change the order of tasks, The orginal was preparation >> startup_task >> waiting_task >> finalization
     # Which caused the waiting task to time out waiting for and updated tms entry, but the startup task had already sent the new flow file
     # So the update attribute processor was never aware of the initial tms value.
     preparation >> [startup_task , waiting_task]   >> finalization
